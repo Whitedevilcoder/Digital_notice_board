@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    
+}
+.notice {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    
+}
+

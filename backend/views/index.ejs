@@ -1,0 +1,252 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centralized Digital Notice Board</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Notice Board</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Role-based login simulation -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="loginBtn"><i class="fa-solid fa-user"></i> Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+      <div class="col-md-8 px-0">
+        <h1 class="display-4">Centralized Digital Notice Board</h1>
+        <p class="lead my-3">
+          Stay updated with announcements categorized by Academic Year, Department, Student Clubs, Placements, and
+          Global Notices.
+        </p>
+      </div>
+    </div>
+
+    <!-- Notice Category Tabs -->
+    <ul class="nav nav-tabs mt-4" id="noticeTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link <%= category === 'academic' ? 'active' : '' %>" href="/?category=academic">Academic Year</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link <%= category === 'department' ? 'active' : '' %>" href="/?category=department">Department</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link <%= category === 'clubs' ? 'active' : '' %>" href="/?category=clubs">Student Clubs</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link <%= category === 'placements' ? 'active' : '' %>" href="/?category=placements">Placements</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link <%= category === 'global' ? 'active' : '' %>" href="/?category=global">Global Notices</a>
+      </li>
+    </ul>
+    
+    <div class="tab-content" id="noticeTabContent">
+      <!-- Academic Year Notices -->
+      <div class="tab-pane fade show active" id="academic" role="tabpanel" aria-labelledby="academic-tab">
+        <div class="notice-container mt-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Academic Year Notice</h5>
+              <p class="card-text">Details about academic calendar and important dates.</p>
+              <div class="notices">
+                <% notices.forEach(notice => { %>
+                  <% if (!category || notice.category === category) { %> 
+                      <div class="notice">
+                          <h3><%= notice.title %></h3>
+                          <p><%= notice.content %></p>
+                          <p><strong>Category:</strong> <%= notice.category %> | <strong>Author:</strong> <%= notice.author %></p>
+                          <form action="/remove/<%= notice._id %>" method="POST">
+                              <button class="btn btn-outline-primary" type="submit">Remove</button>
+                          </form>
+                      </div>
+                  <% } %>
+              <% }); %>
+              </div>
+              <button class="btn btn-outline-primary">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Department Notices -->
+      <div class="tab-pane fade" id="department" role="tabpanel" aria-labelledby="department-tab">
+        <div class="notice-container mt-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Departmental Announcement</h5>
+              <p class="card-text">Updates from the relevant departments.</p>
+              <div class="notices">
+                <% notices.forEach(notice => { %>
+                  <% if (!category || notice.category === category) { %> 
+                      <div class="notice">
+                          <h3><%= notice.title %></h3>
+                          <p><%= notice.content %></p>
+                          <p><strong>Category:</strong> <%= notice.category %> | <strong>Author:</strong> <%= notice.author %></p>
+                          <form action="/remove/<%= notice._id %>" method="POST">
+                              <button class="btn btn-outline-primary" type="submit">Remove</button>
+                          </form>
+                      </div>
+                  <% } %>
+              <% }); %>
+              </div>
+              <button class="btn btn-outline-primary">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Student Clubs Notices -->
+      <div class="tab-pane fade" id="clubs" role="tabpanel" aria-labelledby="clubs-tab">
+        <div class="notice-container mt-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Club Event</h5>
+              <p class="card-text">Join us for the upcoming club event and activities.</p>
+              <div class="notices">
+                <% notices.forEach(notice => { %>
+                  <% if (!category || notice.category === category) { %> 
+                      <div class="notice">
+                          <h3><%= notice.title %></h3>
+                          <p><%= notice.content %></p>
+                          <p><strong>Category:</strong> <%= notice.category %> | <strong>Author:</strong> <%= notice.author %></p>
+                          <form action="/remove/<%= notice._id %>" method="POST">
+                              <button class="btn btn-outline-primary" type="submit">Remove</button>
+                          </form>
+                      </div>
+                  <% } %>
+              <% }); %>
+              </div>
+              <button class="btn btn-outline-primary">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Placements Notices -->
+      <div class="tab-pane fade" id="placements" role="tabpanel" aria-labelledby="placements-tab">
+        <div class="notice-container mt-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Placement Update</h5>
+              <p class="card-text">Latest placement news and company visits.</p>
+              <div class="notices">
+                <% notices.forEach(notice => { %>
+                  <% if (!category || notice.category === category) { %> 
+                      <div class="notice">
+                          <h3><%= notice.title %></h3>
+                          <p><%= notice.content %></p>
+                          <p><strong>Category:</strong> <%= notice.category %> | <strong>Author:</strong> <%= notice.author %></p>
+                          <form action="/remove/<%= notice._id %>" method="POST">
+                              <button class="btn btn-outline-primary" type="submit">Remove</button>
+                          </form>
+                      </div>
+                  <% } %>
+              <% }); %>
+              </div>
+              <button class="btn btn-outline-primary">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Global Notices -->
+      <div class="tab-pane fade" id="global" role="tabpanel" aria-labelledby="global-tab">
+        <div class="notice-container mt-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Global Announcement</h5>
+              <p class="card-text">Important notice for all students.</p>
+              <div class="notices">
+                <% notices.forEach(notice => { %>
+                  <% if (!category || notice.category === category) { %> 
+                      <div class="notice">
+                          <h3><%= notice.title %></h3>
+                          <p><%= notice.content %></p>
+                          <p><strong>Category:</strong> <%= notice.category %> | <strong>Author:</strong> <%= notice.author %></p>
+                          <form action="/remove/<%= notice._id %>" method="POST">
+                              <button class="btn btn-outline-primary" type="submit">Remove</button>
+                          </form>
+                      </div>
+                  <% } %>
+              <% }); %>
+              </div>
+              <button class="btn btn-outline-primary">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Notice Button (for authorized roles) -->
+    <div class="d-flex justify-content-end mt-4">
+      <!-- <button class="btn btn-success" id="postNoticeBtn"><i class="fa-solid fa-plus" onclick="addnotice()"></i> Post Notice</button> -->
+      <button class="btn btn-success" onclick="addnotice()">Post Notice</button>
+    </div>
+  </div>
+
+  <!-- Modal for Posting a New Notice -->
+  <div class="modal fade" id="postNoticeModal" tabindex="-1" aria-labelledby="postNoticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="postNoticeModalLabel">Post a New Notice</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="postNoticeForm">
+            <div class="mb-3">
+              <label for="noticeTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="noticeTitle" required>
+            </div>
+            <div class="mb-3">
+              <label for="noticeCategory" class="form-label">Category</label>
+              <select class="form-select" id="noticeCategory" required>
+                <option value="">Select Category</option>
+                <option value="academic">Academic Year</option>
+                <option value="department">Department</option>
+                <option value="clubs">Student Clubs</option>
+                <option value="placements">Placements</option>
+                <option value="global">Global Notices</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="noticeContent" class="form-label">Content</label>
+              <textarea class="form-control" id="noticeContent" rows="4" required></textarea>
+            </div>
+            <a href="add.ejs">Post Notice</a>
+            <button type="submit" class="btn btn-primary">Post Notice</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="/js/script.js"></script>
+</body>
+
+</html>
