@@ -4,3 +4,5 @@ function addnotice() {
     
     window.location.href = "./add"
 }
+
+

@@ -58,6 +58,9 @@ app.get('/', async (req, res) => {
 app.get('/add', (req, res) => {
     res.render('add');
 });
+app.get('/login', (req, res) => {
+    res.render('login');
+});
 
 app.post('/add', async (req, res) => {
     console.log(req.body);  // Log the request body to check if category is included
